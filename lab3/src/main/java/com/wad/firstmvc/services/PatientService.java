@@ -2,7 +2,6 @@ package com.wad.firstmvc.services;
 
 import com.wad.firstmvc.domain.CareProvider;
 import com.wad.firstmvc.domain.HealthIssue;
-import com.wad.firstmvc.domain.MedicalEncounter;
 import com.wad.firstmvc.domain.Patient;
 
 import java.time.LocalDate;
