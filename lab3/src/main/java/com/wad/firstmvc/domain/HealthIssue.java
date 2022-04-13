@@ -17,6 +17,10 @@ public class HealthIssue {
     private long ID;
     private String type;
 
+    public HealthIssue(String type) {
+        this.type = type;
+    }
+
     @ManyToOne
     private Patient patient;
 

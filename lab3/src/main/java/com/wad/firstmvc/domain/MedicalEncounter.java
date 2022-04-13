@@ -21,9 +21,24 @@ public class MedicalEncounter {
     @ManyToOne
     private Patient patient;
 
-    @OneToMany(mappedBy = "medicalEncounter", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    public MedicalEncounter(Patient p, LocalDate localDate) {
+        this.date = localDate;
+        this.patient = p;
+    }
+
+    @OneToMany(mappedBy = "medicalEncounter", cascade = CascadeType.PERSIST)
     private Set<CareProvider> careProviders = new HashSet<>();
 
-    @OneToMany(mappedBy = "medicalEncounter", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "medicalEncounter", cascade = CascadeType.PERSIST)
     private Set<HealthService> healthServices = new HashSet<>();
+
+    public void addCareProvider(CareProvider careProvider) {
+        this.careProviders.add(careProvider);
+        careProvider.setMedicalEncounter(this);
+    }
+
+    public void addHealthService(HealthService healthService) {
+        this.healthServices.add(healthService);
+        healthService.setMedicalEncounter(this);
+    }
 }

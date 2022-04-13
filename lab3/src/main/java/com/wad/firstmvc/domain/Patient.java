@@ -20,9 +20,19 @@ public class Patient {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST)
     private Set<MedicalEncounter> encounters = new HashSet<>();
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST)
     private Set<HealthIssue> healthIssues = new HashSet<>();
+
+    public void addMedicalEncounter(MedicalEncounter medicalEncounter) {
+        encounters.add(medicalEncounter);
+        medicalEncounter.setPatient(this);
+    }
+
+    public void addHealthIssue(HealthIssue healthIssue) {
+        healthIssues.add(healthIssue);
+        healthIssue.setPatient(this);
+    }
 }
