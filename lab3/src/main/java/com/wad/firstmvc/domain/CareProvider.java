@@ -1,8 +1,6 @@
 package com.wad.firstmvc.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +11,8 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "medicalEncounter")
+@ToString(exclude = "medicalEncounter")
 public class CareProvider {
     @Id
     private long ID;

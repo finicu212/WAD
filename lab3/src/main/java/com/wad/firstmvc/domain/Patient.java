@@ -1,7 +1,9 @@
 package com.wad.firstmvc.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +12,8 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"encounters","healthIssues"})
+//@ToString(exclude = {"encounters","healthIssues"})
 public class Patient {
     @Id
     @GeneratedValue

@@ -1,8 +1,6 @@
 package com.wad.firstmvc.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +11,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"careProviders","healthServices"})
+@ToString(exclude = {"careProviders","healthServices"})
 public class MedicalEncounter {
     @Id
     private long ID;
