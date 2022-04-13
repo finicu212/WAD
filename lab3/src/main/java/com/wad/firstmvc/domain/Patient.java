@@ -16,6 +16,10 @@ public class Patient {
     private long ID;
     private String name;
 
+    public Patient(String name) {
+        this.name = name;
+    }
+
     @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<MedicalEncounter> encounters = new HashSet<>();
 
