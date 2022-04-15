@@ -7,12 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @Entity
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "medicalEncounters")
 public class CareProvider {
     @Id
+    @GeneratedValue
     private long ID;
     private String name, specialty;
 

@@ -3,16 +3,14 @@ package com.wad.firstmvc.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @ToString(exclude = {"healthIssue","medicalEncounter"})
 public class HealthService {
     @Id
+    @GeneratedValue
     private long ID;
     private String description, type;
 

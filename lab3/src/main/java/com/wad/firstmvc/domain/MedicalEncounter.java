@@ -8,13 +8,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @Entity
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = "healthServices")
 @ToString(exclude = {"patient","careProvider"})
 public class MedicalEncounter {
     @Id
+    @GeneratedValue
     private long ID;
     private LocalDate date;
 

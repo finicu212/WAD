@@ -8,12 +8,12 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @ToString(exclude = "patient")
 @EqualsAndHashCode(exclude = "healthServices")
 public class HealthIssue {
     @Id
+    @GeneratedValue
     private long ID;
     private String type;
 
