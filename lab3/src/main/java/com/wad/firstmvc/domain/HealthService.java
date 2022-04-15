@@ -10,8 +10,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode(exclude = {"healthIssues","medicalEncounter"})
-@ToString(exclude = {"healthIssues","medicalEncounter"})
+@ToString(exclude = {"healthIssue","medicalEncounter"})
 public class HealthService {
     @Id
     private long ID;
@@ -22,13 +21,8 @@ public class HealthService {
         this.type = type;
     }
 
-    @OneToMany(mappedBy = "healthService", cascade = CascadeType.PERSIST)
-    private Set<HealthIssue> healthIssues = new HashSet<>();
-
-    public void addHealthIssue(HealthIssue healthIssue) {
-        this.getHealthIssues().add(healthIssue);
-        healthIssue.setHealthService(this);
-    }
+    @ManyToOne
+    private HealthIssue healthIssue;
 
     @ManyToOne
     private MedicalEncounter medicalEncounter;

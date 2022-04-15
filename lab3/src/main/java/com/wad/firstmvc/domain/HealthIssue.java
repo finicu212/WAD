@@ -2,16 +2,16 @@ package com.wad.firstmvc.domain;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode(exclude = {"patient","healthService"})
-@ToString(exclude = {"patient","healthService"})
+@ToString(exclude = "patient")
+@EqualsAndHashCode(exclude = "healthServices")
 public class HealthIssue {
     @Id
     private long ID;
@@ -24,6 +24,11 @@ public class HealthIssue {
     @ManyToOne
     private Patient patient;
 
-    @ManyToOne
-    private HealthService healthService;
+    @OneToMany(mappedBy = "healthIssue", cascade = CascadeType.PERSIST)
+    private Set<HealthService> healthServices = new HashSet<>();
+
+    public void addHealthService(HealthService healthService) {
+        this.getHealthServices().add(healthService);
+        healthService.setHealthIssue(this);
+    }
 }

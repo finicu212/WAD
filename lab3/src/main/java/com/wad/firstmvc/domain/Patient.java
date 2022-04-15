@@ -12,8 +12,7 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"encounters","healthIssues"})
-//@ToString(exclude = {"encounters","healthIssues"})
+@EqualsAndHashCode(exclude = {"medicalEncounters", "healthIssues"})
 public class Patient {
     @Id
     @GeneratedValue
@@ -25,13 +24,13 @@ public class Patient {
     }
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<MedicalEncounter> encounters = new HashSet<>();
+    private Set<MedicalEncounter> medicalEncounters = new HashSet<>();
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<HealthIssue> healthIssues = new HashSet<>();
 
     public void addMedicalEncounter(MedicalEncounter medicalEncounter) {
-        encounters.add(medicalEncounter);
+        medicalEncounters.add(medicalEncounter);
         medicalEncounter.setPatient(this);
     }
 
