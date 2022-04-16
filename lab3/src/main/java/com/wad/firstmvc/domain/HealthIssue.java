@@ -1,6 +1,7 @@
 package com.wad.firstmvc.domain;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,9 +23,10 @@ public class HealthIssue {
     }
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Patient patient;
 
-    @OneToMany(mappedBy = "healthIssue", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "healthIssue", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<HealthService> healthServices = new HashSet<>();
 
     public void addHealthService(HealthService healthService) {

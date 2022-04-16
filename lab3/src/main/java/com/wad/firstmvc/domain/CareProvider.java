@@ -21,11 +21,11 @@ public class CareProvider {
         this.specialty = specialty;
     }
 
-    @OneToMany(mappedBy = "careProvider", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "careProvider", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MedicalEncounter> medicalEncounters = new HashSet<>();
 
     public void addMedicalEncounter(MedicalEncounter medicalEncounter) {
-        this.medicalEncounters.add(medicalEncounter);
+        this.getMedicalEncounters().add(medicalEncounter);
         medicalEncounter.setCareProvider(this);
     }
 }

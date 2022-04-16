@@ -25,8 +25,11 @@ public class PatientServiceImpl implements PatientService {
         return (List<Patient>) patientRepository.findAll();
     }
 
+
+
+    /*
     @Override
-    public List<HealthIssue> findHealthIssues(Patient patient) {
+    public List<HealthIssue> findHealthIssues(String patient) {
         return null;
     }
 
@@ -44,4 +47,5 @@ public class PatientServiceImpl implements PatientService {
     public List<CareProvider> findByHistory(HealthIssue healthIssue) {
         return null;
     }
+    */
 }

@@ -1,6 +1,7 @@
 package com.wad.firstmvc.domain;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -20,8 +21,10 @@ public class HealthService {
     }
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private HealthIssue healthIssue;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private MedicalEncounter medicalEncounter;
 }

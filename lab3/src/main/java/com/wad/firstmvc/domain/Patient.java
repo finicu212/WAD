@@ -23,14 +23,14 @@ public class Patient {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<MedicalEncounter> medicalEncounters = new HashSet<>();
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<HealthIssue> healthIssues = new HashSet<>();
 
     public void addMedicalEncounter(MedicalEncounter medicalEncounter) {
-        medicalEncounters.add(medicalEncounter);
+        this.getMedicalEncounters().add(medicalEncounter);
         medicalEncounter.setPatient(this);
     }
 

@@ -1,6 +1,7 @@
 package com.wad.firstmvc.domain;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,9 +20,11 @@ public class MedicalEncounter {
     private LocalDate date;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Patient patient;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private CareProvider careProvider;
 
     public MedicalEncounter(Patient p, LocalDate localDate) {
@@ -29,11 +32,11 @@ public class MedicalEncounter {
         this.patient = p;
     }
 
-    @OneToMany(mappedBy = "medicalEncounter", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "medicalEncounter", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<HealthService> healthServices = new HashSet<>();
 
     public void addHealthService(HealthService healthService) {
-        this.healthServices.add(healthService);
+        this.getHealthServices().add(healthService);
         healthService.setMedicalEncounter(this);
     }
 }
