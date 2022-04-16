@@ -29,7 +29,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Patient razvan = new Patient("Razvan");
+        Patient Rodica = new Patient("Rodica");
 
         HealthIssue neluBleach = new HealthIssue("drank bleach from nea nelu");
 
@@ -39,8 +39,8 @@ public class DataLoader implements CommandLineRunner {
         CareProvider relu = new CareProvider("nea Relu", "janitor");
         CareProvider einstein = new CareProvider("dr. Einstein", "terapie intensiva");
 
-        MedicalEncounter razvanEncounter1 = new MedicalEncounter(razvan, LocalDate.parse("2010-10-24"));
-        MedicalEncounter razvanEncounter2 = new MedicalEncounter(razvan, LocalDate.parse("2010-10-25"));
+        MedicalEncounter razvanEncounter1 = new MedicalEncounter(Rodica, LocalDate.parse("2010-10-24"));
+        MedicalEncounter razvanEncounter2 = new MedicalEncounter(Rodica, LocalDate.parse("2010-10-25"));
 
         relu.addMedicalEncounter(razvanEncounter1);
         razvanEncounter1.addHealthService(reluCloset);
@@ -48,19 +48,19 @@ public class DataLoader implements CommandLineRunner {
         einstein.addMedicalEncounter(razvanEncounter2);
         razvanEncounter2.addHealthService(bucharestICU);
 
-        razvan.addMedicalEncounter(razvanEncounter1);
-        razvan.addMedicalEncounter(razvanEncounter2);
+        Rodica.addMedicalEncounter(razvanEncounter1);
+        Rodica.addMedicalEncounter(razvanEncounter2);
 
         neluBleach.addHealthService(reluCloset);
         neluBleach.addHealthService(bucharestICU);
 
-        razvan.addHealthIssue(neluBleach);
+        Rodica.addHealthIssue(neluBleach);
 
-//        MedicalEncounter daniEncounters = new MedicalEncounter(razvan, LocalDate.parse("2014-04-13"));
-//        MedicalEncounter andreiEncounters = new MedicalEncounter(razvan, LocalDate.parse("2006-01-03"));
+//        MedicalEncounter daniEncounters = new MedicalEncounter(Rodica, LocalDate.parse("2014-04-13"));
+//        MedicalEncounter andreiEncounters = new MedicalEncounter(Rodica, LocalDate.parse("2006-01-03"));
 
 //        try {
-//            patientService.save(razvan);
+//            patientService.save(Rodica);
 //        } catch (TransientPropertyValueException tpve) {
 //            tpve.printStackTrace();
 //        } catch (Exception e) {
@@ -69,20 +69,20 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("\n\n\n");
 
-        System.out.println("All Patients (expected: Razvan)");
+        System.out.println("All Patients (expected: Rodica)");
         List<Patient> patients = patientService.findAll();
         patients.forEach(System.out::println);
 
         System.out.println("\n\n\n");
 
-        System.out.println("all health issues of razvan:");
-        List<HealthIssue> healthIssuesByPatient = healthIssueService.findHealthIssuesByPatientName("Razvan");
+        System.out.println("all health issues of Rodica:");
+        List<HealthIssue> healthIssuesByPatient = healthIssueService.findHealthIssuesByPatientName("Rodica");
         healthIssuesByPatient.forEach(System.out::println);
 
         System.out.println("\n\n\n");
 
-        //List<HealthIssue> issues = patientService.findHealthIssues("Razvan");
-        System.out.println("Patients who had an accident on \"2010-10-24\" (expected: Razvan)");
+        //List<HealthIssue> issues = patientService.findHealthIssues("Rodica");
+        System.out.println("Patients who had an accident on \"2010-10-24\" (expected: Rodica)");
         List<Patient> patientsByDate = patientService.findPatientsByAccidentDate(LocalDate.parse("2010-10-24"));
         patientsByDate.forEach(System.out::println);
 
@@ -94,9 +94,15 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("\n\n\n");
 
-        System.out.println("Patients who had einstein as care provider (expected: razvan)");
+        System.out.println("Patients who had einstein as care provider (expected: Rodica)");
         List<Patient> patientsMetEinstein = patientService.findPatientsByCareProvider("dr. Einstein");
         patientsMetEinstein.forEach(System.out::println);
+
+        System.out.println("\n\n\n");
+
+        System.out.println("Care providers who had patients who drank bleach from nea nelu");
+        List<CareProvider> careProvidersByHealthIssue = careProviderService.findCareProvidersByHistory("drank bleach from nea nelu");
+        careProvidersByHealthIssue.forEach(System.out::println);
 
         System.out.println("\n\n\n");
 

@@ -17,6 +17,4 @@ public interface PatientRepository extends CrudRepository<Patient, Long> {
     @Query(value = "select p from Patient p join p.medicalEncounters encs join encs.careProvider cp where cp.name = :careProviderName")
     List<Patient> findPatientsByCareProvider(String careProviderName);
 
-//    List<CareProvider> findCareProvidersByHistory(HealthIssue healthIssue);
-
 }

@@ -34,9 +34,4 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> findPatientsByCareProvider(String careProviderName) {
         return patientRepository.findPatientsByCareProvider(careProviderName);
     }
-
-//    @Override
-//    public List<CareProvider> findCareProvidersByHistory(HealthIssue healthIssue) {
-//        return patientRepository.findCareProvidersByHistory(healthIssue);
-//    }
 }

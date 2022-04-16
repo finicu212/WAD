@@ -20,6 +20,4 @@ public interface PatientService {
     List<Patient> findPatientsByAccidentDate(LocalDate date);
     // returns all his/her patients of careProvider (by name)
     List<Patient> findPatientsByCareProvider(String careProviderName);
-    // all care providers who performed a health service for given health issue
-//    List<CareProvider> findCareProvidersByHistory(HealthIssue healthIssue);
 }

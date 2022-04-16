@@ -1,6 +1,7 @@
 package com.wad.firstmvc.services;
 
 import com.wad.firstmvc.domain.CareProvider;
+import com.wad.firstmvc.domain.HealthIssue;
 import com.wad.firstmvc.repositories.CareProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,10 @@ public class CareProviderServiceImpl implements CareProviderService {
     @Override
     public List<CareProvider> findAll() {
         return (List<CareProvider>) careProviderRepository.findAll();
+    }
+
+    @Override
+    public List<CareProvider> findCareProvidersByHistory(String healthIssue) {
+        return careProviderRepository.findCareProvidersByHistory(healthIssue);
     }
 }
