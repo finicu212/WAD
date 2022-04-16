@@ -12,12 +12,10 @@ import java.util.List;
 
 @Component("patientRepository")
 public interface PatientRepository extends CrudRepository<Patient, Long> {
-    @Query
-    List<HealthIssue> findHealthIssuesByPatient(String patient);
-
+    @Query(value = "select p from Patient p join p.medicalEncounters encs where encs.date = :date")
     List<Patient> findPatientsByAccidentDate(LocalDate date);
-
-//    List<Patient> findPatientsByCareProvider(String careProviderName);
+    @Query(value = "select p from Patient p join p.medicalEncounters encs join encs.careProvider cp where cp.name = :careProviderName")
+    List<Patient> findPatientsByCareProvider(String careProviderName);
 
 //    List<CareProvider> findCareProvidersByHistory(HealthIssue healthIssue);
 

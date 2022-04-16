@@ -16,14 +16,10 @@ public interface PatientService {
     void save(Patient patient);
     List<Patient> findAll();
 
-
-//    // returns all health issues of this patient
-//    //@Query("SELECT * FROM HealthIssue hi WHERE hi.patient.name = :patient")
-//    List<HealthIssue> findHealthIssuesByPatient(String patient);
-//    // returns all patients who had a medical encounter that date
+    // returns all patients who had a medical encounter that date
     List<Patient> findPatientsByAccidentDate(LocalDate date);
     // returns all his/her patients of careProvider (by name)
-//    List<Patient> findPatientsByCareProvider(String careProviderName);
-//    // all care providers who performed a health service for given health issue
+    List<Patient> findPatientsByCareProvider(String careProviderName);
+    // all care providers who performed a health service for given health issue
 //    List<CareProvider> findCareProvidersByHistory(HealthIssue healthIssue);
 }

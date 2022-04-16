@@ -21,4 +21,9 @@ public class HealthIssueServiceImpl implements HealthIssueService {
     public List<HealthIssue> findAll() {
         return (List<HealthIssue>) healthIssueRepository.findAll();
     }
+
+    @Override
+    public List<HealthIssue> findHealthIssuesByPatientName(String patient) {
+        return healthIssueRepository.findHealthIssuesByPatientName(patient);
+    }
 }
