@@ -24,28 +24,24 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> findAll() {
         return (List<Patient>) patientRepository.findAll();
     }
-
-
-
-    /*
-    @Override
-    public List<HealthIssue> findHealthIssues(String patient) {
-        return null;
-    }
+//
+//    @Override
+//    public List<HealthIssue> findHealthIssuesByPatient(String patient) {
+//        return patientRepository.findHealthIssuesByPatient(patient);
+//    }
 
     @Override
-    public List<Patient> findByAccidentDate(LocalDate date) {
-        return null;
+    public List<Patient> findPatientsByAccidentDate(LocalDate date) {
+        return patientRepository.findPatientsByAccidentDate(date);
     }
 
-    @Override
-    public List<Patient> findByCareProvider(String careProviderName) {
-        return null;
-    }
-
-    @Override
-    public List<CareProvider> findByHistory(HealthIssue healthIssue) {
-        return null;
-    }
-    */
+//    @Override
+//    public List<Patient> findPatientsByCareProvider(String careProviderName) {
+//        return patientRepository.findPatientsByCareProvider(careProviderName);
+//    }
+//
+//    @Override
+//    public List<CareProvider> findCareProvidersByHistory(HealthIssue healthIssue) {
+//        return patientRepository.findCareProvidersByHistory(healthIssue);
+//    }
 }

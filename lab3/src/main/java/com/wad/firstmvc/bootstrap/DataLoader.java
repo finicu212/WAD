@@ -72,7 +72,8 @@ public class DataLoader implements CommandLineRunner {
 
         //List<Patient> patients = patientService.findAll();
 
-        List<HealthIssue> issues = patientService.findHealthIssues("Razvan");
+        //List<HealthIssue> issues = patientService.findHealthIssues("Razvan");
+        List<Patient> issues = patientService.findAll();
         issues.forEach(System.out::println);
     }
 }
