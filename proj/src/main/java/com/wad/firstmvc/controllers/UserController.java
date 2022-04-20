@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Random;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/register")
 public class UserController {
     private final UserService userService;
 
@@ -20,24 +20,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public String viewUsers(Model model){
-        model.addAttribute("users",userService.findAll());
-        return "users";
-    }
-
-    @GetMapping("/new")
+    @GetMapping("/")
     public String showAddUserForm(Model model){
         model.addAttribute("user",new User());
         return "addusers";
     }
 
-    @PostMapping("/new")
+    @PostMapping("/")
     public String addUser(User user){
         if(user.getId()==null)
             user.setId(new Random().nextLong());
         userService.save(user);
-        return "redirect:/users";
+        return "redirect:/index";
     }
 
 }
