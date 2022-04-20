@@ -3,6 +3,7 @@ package com.wad.firstmvc.bootstrap;
 import com.wad.firstmvc.domain.*;
 import com.wad.firstmvc.repositories.PatientRepository;
 import com.wad.firstmvc.services.*;
+import org.hibernate.TransientPropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -67,44 +68,44 @@ public class DataLoader implements CommandLineRunner {
 //            e.printStackTrace();
 //        }
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
         System.out.println("All Patients (expected: Rodica)");
         List<Patient> patients = patientService.findAll();
         patients.forEach(System.out::println);
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
         System.out.println("all health issues of Rodica:");
         List<HealthIssue> healthIssuesByPatient = healthIssueService.findHealthIssuesByPatientName("Rodica");
         healthIssuesByPatient.forEach(System.out::println);
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
         //List<HealthIssue> issues = patientService.findHealthIssues("Rodica");
         System.out.println("Patients who had an accident on \"2010-10-24\" (expected: Rodica)");
         List<Patient> patientsByDate = patientService.findPatientsByAccidentDate(LocalDate.parse("2010-10-24"));
         patientsByDate.forEach(System.out::println);
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
         System.out.println("Patients who had an accident on \"2000-10-24\" (expected: nobody)");
         List<Patient> patientsByWrongDate = patientService.findPatientsByAccidentDate(LocalDate.parse("2000-10-24"));
         patientsByWrongDate.forEach(System.out::println);
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
         System.out.println("Patients who had einstein as care provider (expected: Rodica)");
         List<Patient> patientsMetEinstein = patientService.findPatientsByCareProvider("dr. Einstein");
         patientsMetEinstein.forEach(System.out::println);
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
         System.out.println("Care providers who had patients who drank bleach from nea nelu");
         List<CareProvider> careProvidersByHealthIssue = careProviderService.findCareProvidersByHistory("drank bleach from nea nelu");
         careProvidersByHealthIssue.forEach(System.out::println);
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
 
 
     }
