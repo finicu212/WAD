@@ -40,33 +40,22 @@ public class DataLoader implements CommandLineRunner {
         CareProvider relu = new CareProvider("nea Relu", "janitor");
         CareProvider einstein = new CareProvider("dr. Einstein", "terapie intensiva");
 
-        MedicalEncounter razvanEncounter1 = new MedicalEncounter(Rodica, LocalDate.parse("2010-10-24"));
-        MedicalEncounter razvanEncounter2 = new MedicalEncounter(Rodica, LocalDate.parse("2010-10-25"));
+        MedicalEncounter rodicaEncounter1 = new MedicalEncounter(Rodica, LocalDate.parse("2012-11-21"));
+        MedicalEncounter rodicaEncounter2 = new MedicalEncounter(Rodica, LocalDate.parse("2012-01-21"));
 
-        relu.addMedicalEncounter(razvanEncounter1);
-        razvanEncounter1.addHealthService(reluCloset);
+        relu.addMedicalEncounter(rodicaEncounter1);
+        rodicaEncounter1.addHealthService(reluCloset);
 
-        einstein.addMedicalEncounter(razvanEncounter2);
-        razvanEncounter2.addHealthService(bucharestICU);
+        einstein.addMedicalEncounter(rodicaEncounter2);
+        rodicaEncounter2.addHealthService(bucharestICU);
 
-        Rodica.addMedicalEncounter(razvanEncounter1);
-        Rodica.addMedicalEncounter(razvanEncounter2);
+        Rodica.addMedicalEncounter(rodicaEncounter1);
+        Rodica.addMedicalEncounter(rodicaEncounter2);
 
         neluBleach.addHealthService(reluCloset);
         neluBleach.addHealthService(bucharestICU);
 
         Rodica.addHealthIssue(neluBleach);
-
-//        MedicalEncounter daniEncounters = new MedicalEncounter(Rodica, LocalDate.parse("2014-04-13"));
-//        MedicalEncounter andreiEncounters = new MedicalEncounter(Rodica, LocalDate.parse("2006-01-03"));
-
-//        try {
-//            patientService.save(Rodica);
-//        } catch (TransientPropertyValueException tpve) {
-//            tpve.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         System.out.println("\n");
 
@@ -77,14 +66,15 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("\n");
 
         System.out.println("all health issues of Rodica:");
-        List<HealthIssue> healthIssuesByPatient = healthIssueService.findHealthIssuesByPatientName("Rodica");
+        //List<HealthIssue> healthIssuesByPatient = healthIssueService.findHealthIssuesByPatientName("Rodica");
+        List<HealthIssue> healthIssuesByPatient = healthIssueService.findHealthIssuesByPatientName("Roasdfdica");
         healthIssuesByPatient.forEach(System.out::println);
 
         System.out.println("\n");
 
         //List<HealthIssue> issues = patientService.findHealthIssues("Rodica");
-        System.out.println("Patients who had an accident on \"2010-10-24\" (expected: Rodica)");
-        List<Patient> patientsByDate = patientService.findPatientsByAccidentDate(LocalDate.parse("2010-10-24"));
+        System.out.println("Patients who had an accident on \"2012-11-21\" (expected: Rodica)");
+        List<Patient> patientsByDate = patientService.findPatientsByAccidentDate(LocalDate.parse("2012-01-21"));
         patientsByDate.forEach(System.out::println);
 
         System.out.println("\n");
