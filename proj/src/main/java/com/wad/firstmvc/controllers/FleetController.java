@@ -1,6 +1,7 @@
 package com.wad.firstmvc.controllers;
 
 
+import com.wad.firstmvc.repositories.AppointmentRepository;
 import com.wad.firstmvc.services.MaintenanceItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FleetController {
     @Autowired
     MaintenanceItemService maintenanceItemService;
+    @Autowired
+    AppointmentRepository appointmentRepository;
 
     @GetMapping
     public String fleet(Model model) {
         model.addAttribute("maintenanceItems", maintenanceItemService.findAll());
+        model.addAttribute("appointments", appointmentRepository.findAll());
         return "fleet";
     }
 }
