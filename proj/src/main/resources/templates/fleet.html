@@ -137,13 +137,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="maintenanceItem">
-                                <td width="20px" th:text="${maintenanceItem.id}"></td>
-                                <td th:text="${maintenanceItem.name}"></td>
-                                <td th:text="${maintenanceItem.description}"></td>
-                                <td th:text="${maintenanceItem.provider}"></td>
-                                <td th:text="${maintenanceItem.price}"></td>
-                            </tr>
+                        <tr th:each="maintenanceItem : ${maintenanceItems}">
+                            <td width="20px" th:text="${maintenanceItem.id}"></td>
+                            <td th:text="${maintenanceItem.name}"></td>
+                            <td th:text="${maintenanceItem.description}"></td>
+                            <td th:text="${maintenanceItem.provider}"></td>
+                            <td th:text="${maintenanceItem.price}"></td>
+                        </tr>
 <!--                        <tr>-->
 <!--                            <td>0</td>-->
 <!--                            <td>Oil</td>-->

@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     @GetMapping
     public String home() {
-        //returns the view
         return "index";
     }
 
     @PostMapping
     public String showFleetPage() {
-        //returns the view
-        return "fleet";
+        return "redirect:fleet";
     }
 }
