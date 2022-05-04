@@ -22,12 +22,19 @@
 </form>
 
 <h2>Delete product:</h2>
-Id
-<input id="deleteProductId" name="deleteId" >
-<input id="deleteProductButton" type="submit">
+<form>
+    Id
+    <input id="deleteProductId" name="deleteId" >
+    <input id="deleteProductButton" type="submit">
+</form>
 
 <h2>Modify product:</h2>
-<!--TODO 3 inputs and button for modify-->
+<form>
+    Id<input id="patchProductId" name="deleteId" >
+    Name<input id="patchProductName" name="addProductName" >
+    Price<input id="patchProductPrice" name="addProductPrice" >
+    <input id="patchProductButton" type="submit">
+</form>
 
 <h2>Product list:</h2>
 <div id="products"></div>

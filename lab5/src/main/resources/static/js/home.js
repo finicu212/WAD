@@ -7,6 +7,11 @@ const addProductPrice = document.getElementById("addProductPrice");
 const deleteProductId = document.getElementById("deleteProductId");
 const deleteProductButton = document.getElementById("deleteProductButton");
 
+const patchProductId = document.getElementById("patchProductId");
+const patchProductName = document.getElementById("patchProductName");
+const patchProductPrice = document.getElementById("patchProductPrice");
+const patchProductButton = document.getElementById("patchProductButton");
+
 refreshProducts();
 
 function refreshProducts(){
@@ -38,6 +43,7 @@ addProductButton.onclick = () => {
         },
         body: JSON.stringify(product)
     }).then(refreshProducts());
+    refreshProducts();
 }
 
 deleteProductButton.onclick = () => {
@@ -48,8 +54,22 @@ deleteProductButton.onclick = () => {
           // 'Content-Type': 'application/x-www-form-urlencoded',
         }
     }).then(refreshProducts());
+    refreshProducts();
 }
 
-// TODO 6 delete product
-// TODO 7 modify product
+patchProductButton.onclick = () => {
+    var product = {
+        name: patchProductName.value,
+        price: patchProductPrice.value,
+    };
+    fetch('/api/v1/products/' + patchProductId.value, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(product)
+    }).then(refreshProducts());
+    refreshProducts();
+}
 
