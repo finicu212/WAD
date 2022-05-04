@@ -1,8 +1,11 @@
 const prodDiv = document.getElementById("products");
 const addProductButton = document.getElementById("addProductButton");
-const addProductName = document.getElementById("name_post");
-const addProductPrice = document.getElementById("price_post");
 
+const addProductName = document.getElementById("addProductName");
+const addProductPrice = document.getElementById("addProductPrice");
+
+const deleteProductId = document.getElementById("deleteProductId");
+const deleteProductButton = document.getElementById("deleteProductButton");
 
 refreshProducts();
 
@@ -24,11 +27,27 @@ function showProducts(products){
 
 addProductButton.onclick = () => {
     var product = {
-        name: name,
-        price: price,
+        name: addProductName.value,
+        price: addProductPrice.value,
     };
-   // TODO 4 create a product JSON from the inputs
-   // TODO 5 FETCH POST request to api/v1/products/ containing the new product, then call refreshProducts
+    fetch('/api/v1/products/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(product)
+    }).then(refreshProducts());
+}
+
+deleteProductButton.onclick = () => {
+    fetch('/api/v1/products/' + deleteProductId.value, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        }
+    }).then(refreshProducts());
 }
 
 // TODO 6 delete product
