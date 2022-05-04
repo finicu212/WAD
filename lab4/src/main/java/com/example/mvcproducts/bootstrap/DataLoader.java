@@ -34,6 +34,7 @@ public class DataLoader implements CommandLineRunner {
     productService.saveAll(productList);
 
     PasswordEncoder bcrypt = new BCryptPasswordEncoder();
+    System.out.println(bcrypt.encode("user1"));
     User user1=new User("user1",bcrypt.encode("user1"));
     user1.getRoles().add(Role.ROLE_USER);
     User user2=new User("user2",bcrypt.encode("user2"));

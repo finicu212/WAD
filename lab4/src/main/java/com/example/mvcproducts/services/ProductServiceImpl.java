@@ -5,6 +5,7 @@ import com.example.mvcproducts.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -27,5 +28,12 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public void save(Product product) {
     productRepository.save(product);
+  }
+
+  @Override
+  public Product findById(Long pid) {
+    Optional<Product> result = productRepository.findById(pid);
+//    return result.get();
+    return result.orElse(null);
   }
 }

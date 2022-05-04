@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>AutoDIY Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -61,7 +61,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <span data-feather="users"></span>
-                                Customers
+                                Drivers
                             </a>
                         </li>
                         <li class="nav-item">
@@ -70,12 +70,12 @@
                                 Reports
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="layers"></span>
-                                Integrations
-                            </a>
-                        </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="#">-->
+<!--                                <span data-feather="layers"></span>-->
+<!--                                Integrations-->
+<!--                            </a>-->
+<!--                        </li>-->
                     </ul>
 
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -112,16 +112,19 @@
                             <button class="btn btn-sm btn-outline-secondary">Share</button>
                             <button class="btn btn-sm btn-outline-secondary">Export</button>
                         </div>
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <span data-feather="calendar"></span>
-                            This week
-                        </button>
                     </div>
                 </div>
 
-                <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+                <canvas class="my-4" id="myChart" width="900" height="320"></canvas>
 
-                <h2>Upcoming Maintenance</h2>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                    <h2>Upcoming Maintenance</h2>
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span data-feather="calendar"></span>
+                        This week
+                    </button>
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <thead>
@@ -134,20 +137,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>0</td>
-                            <td>Oil</td>
-                            <td>0w30 for Diesels</td>
-                            <td>Castrol Oils</td>
-                            <td>$60</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Oil Pan</td>
-                            <td>Recommended Oil Pan Change following accident</td>
-                            <td>Militari La Vericu</td>
-                            <td>$140</td>
-                        </tr>
+                            <tr th:each="maintenanceItem">
+                                <td width="20px" th:text="${maintenanceItem.id}"></td>
+                                <td th:text="${maintenanceItem.name}"></td>
+                                <td th:text="${maintenanceItem.description}"></td>
+                                <td th:text="${maintenanceItem.provider}"></td>
+                                <td th:text="${maintenanceItem.price}"></td>
+                            </tr>
+<!--                        <tr>-->
+<!--                            <td>0</td>-->
+<!--                            <td>Oil</td>-->
+<!--                            <td>0w30 for Diesels</td>-->
+<!--                            <td>Castrol Oils</td>-->
+<!--                            <td>$60</td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>1</td>-->
+<!--                            <td>Oil Pan</td>-->
+<!--                            <td>Recommended Oil Pan Change following accident</td>-->
+<!--                            <td>Militari La Vericu</td>-->
+<!--                            <td>$140</td>-->
+<!--                        </tr>-->
                         </tbody>
                     </table>
                 </div>
@@ -176,9 +186,9 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
           datasets: [{
-            data: [20, 250, 320, 240, 255, 180, 10],
+            data: [250, 320, 240, 255, 180, 10, 20],
             lineTension: 0,
             backgroundColor: '#007bff',
             borderColor: '#007bff',

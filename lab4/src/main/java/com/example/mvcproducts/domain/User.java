@@ -32,6 +32,9 @@ public class User implements UserDetails {
     this.password = password;
   }
 
+  @OneToOne(mappedBy = "user")
+  private Cart cart;
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     List<SimpleGrantedAuthority> authorities = new ArrayList<>();

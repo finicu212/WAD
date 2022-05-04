@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -29,6 +30,13 @@ public class ProductController {
     return "products";
   }
 
+  @GetMapping("/id")
+  public String getProductById(Model model, Authentication authentication, @RequestParam Long pid) {
+    model.addAttribute("products", productService.findById(pid));
+    User user = (User) authentication.getPrincipal();
+    log.info(user.getUsername());
+    return "products";
+  }
 
 
   @PostMapping
