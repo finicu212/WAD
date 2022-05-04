@@ -132,6 +132,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Vehicle</th>
                             <th>Provider</th>
                             <th>Price</th>
                         </tr>
@@ -141,6 +142,7 @@
                             <td width="20px" th:text="${maintenanceItem.id}"></td>
                             <td th:text="${maintenanceItem.name}"></td>
                             <td th:text="${maintenanceItem.description}"></td>
+                            <td th:text="${maintenanceItem.vehicle.make + ' ' + maintenanceItem.vehicle.model + ' #' + maintenanceItem.vehicle.id}"></td> <!-- this-->
                             <td th:text="${maintenanceItem.provider}"></td>
                             <td th:text="${maintenanceItem.price}"></td>
                         </tr>
