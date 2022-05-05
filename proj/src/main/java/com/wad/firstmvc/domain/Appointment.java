@@ -38,5 +38,6 @@ public class Appointment {
 
     public void addMaintenanceItem(MaintenanceItem maintenanceItem) {
         this.maintenanceItems.add(maintenanceItem);
+        maintenanceItem.setAppointment(this);
     }
 }

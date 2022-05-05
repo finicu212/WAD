@@ -16,6 +16,6 @@ public class HomeController {
 
     @PostMapping
     public String showFleetPage() {
-        return "redirect:fleet";
+        return "redirect:dashboard";
     }
 }

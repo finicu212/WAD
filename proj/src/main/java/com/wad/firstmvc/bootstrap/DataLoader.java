@@ -38,6 +38,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
 //        User u;
 //        u = new User("avirtopeanu", "avirtopeanu@gmail.com");
 //        userService.save(u);
