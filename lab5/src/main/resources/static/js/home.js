@@ -12,7 +12,9 @@ const patchProductName = document.getElementById("patchProductName");
 const patchProductPrice = document.getElementById("patchProductPrice");
 const patchProductButton = document.getElementById("patchProductButton");
 
-refreshProducts();
+//refreshProducts();
+
+console.log()
 
 function refreshProducts(){
     fetch('/api/v1/products/')
@@ -42,7 +44,10 @@ addProductButton.onclick = () => {
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(product)
-    }).then(refreshProducts());
+    }).then(function(response) {
+        console.log(response.status);
+        refreshProducts();
+    });
     refreshProducts();
 }
 
@@ -53,7 +58,12 @@ deleteProductButton.onclick = () => {
           'Content-Type': 'application/json'
           // 'Content-Type': 'application/x-www-form-urlencoded',
         }
-    }).then(refreshProducts());
+    }).then(function(response) {
+        console.log(response.status);
+        if (response.status === 405) alert("Deletion failed!");
+        else alert("Deletion success!");
+        refreshProducts();
+    });
     refreshProducts();
 }
 
@@ -69,7 +79,10 @@ patchProductButton.onclick = () => {
           // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(product)
-    }).then(refreshProducts());
+    }).then(function(response) {
+        console.log(response.status);
+        refreshProducts();
+    });
     refreshProducts();
 }
 

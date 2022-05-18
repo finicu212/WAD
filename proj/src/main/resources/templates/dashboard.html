@@ -117,7 +117,11 @@
                                 <span data-feather="file-text"></span>
                                 <a class="p-0 m-0" href='#' aria-hidden='true'><span class="col-md-9" th:text="${appointment.name + ' - ' + appointment.location}" th:remove="tag"></span></a>
                             </div>
-                            <sub class="align-items-center mb-2 text-muted">2000-12-12</sub>
+                            <sub th:text="${#dates.year(appointment.date) + '-' +
+                            #dates.month(appointment.date) + '-' +
+                            #dates.day(appointment.date) + ': ' +
+                            appointment.vehicle.make + ' ' + appointment.vehicle.model + ' #' + appointment.vehicle.id
+                            }" th:remove="tag" class="align-items-center mb-2 text-muted">2000-12-12</sub>
                         </li>
                     </ul>
                 </div>

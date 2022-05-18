@@ -7,6 +7,7 @@ import com.example.mvcproducts.services.ProductService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class ProductRestController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Product>> getAllProducts(){
+    public ResponseEntity<List<Product>> getAllProducts() {
         return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
     }
 
@@ -61,12 +62,12 @@ public class ProductRestController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location","/api/v1/products/"+ deletedProduct.getId().toString());
         System.out.println(headers);
-        return new ResponseEntity<>(headers,HttpStatus.I_AM_A_TEAPOT);
+        return new ResponseEntity<>(headers,HttpStatus.OK);
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<?> patchProduct(@PathVariable Long id, @RequestBody Product p) {
-        Product deletedProduct = null;
+    public ResponseEntity<?> patchProduct(@PathVariable Long id, @RequestBody Product p, Model model) {
+        Product patchedProduct = null;
         // bleh temp just for now
 
         for (Product p1 : productRepository.findAll())
@@ -74,19 +75,19 @@ public class ProductRestController {
             {
                 productRepository.delete(p1);
                 productRepository.save(p);
-                deletedProduct = p1;
+                patchedProduct = p1;
             }
 
-        if (deletedProduct == null)
+        if (patchedProduct == null)
         {
             HttpHeaders headers = new HttpHeaders();
-            return new ResponseEntity<>(headers,HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity<>(headers,HttpStatus.BAD_REQUEST);
         }
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location","/api/v1/products/"+ deletedProduct.getId().toString());
+        headers.add("Location","/api/v1/products/"+ patchedProduct.getId().toString());
         System.out.println(headers);
-        return new ResponseEntity<>(headers,HttpStatus.FOUND);
+        return new ResponseEntity<>(headers,HttpStatus.OK);
     }
 
 }
