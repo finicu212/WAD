@@ -64,8 +64,7 @@ public class DataLoader implements CommandLineRunner {
 //        // save to db
 //        maintenanceItemService.save(maintenanceItem);
 //        appointmentRepository.save(appointment);
-//        vehicleRepository.save(v);
-//        // ---
+//        vehicleRepository.save(v);//        // ---
 //
 //        v = new Vehicle("Honda", "Civic", 1800);
 //

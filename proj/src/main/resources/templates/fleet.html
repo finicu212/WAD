@@ -38,7 +38,6 @@
     </div>
 </div>
 
-
 <body>
 <div class="container-fluid vh-100">
     <div class="row">
@@ -52,11 +51,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/">Log out</a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
-                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/fleet">Fleet</a>
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/fleet">Fleet <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>
@@ -70,7 +69,7 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="fleet">
+                            <a class="nav-link" href="#">
                                 <span data-feather="truck"></span>
                                 Vehicles
                             </a>
@@ -87,46 +86,12 @@
                                 Drivers
                             </a>
                         </li>
-<!--                        <li class="nav-item">-->
-<!--                            <a class="nav-link" href="#">-->
-<!--                                <span data-feather="layers"></span>-->
-<!--                                Integrations-->
-<!--                            </a>-->
-<!--                        </li>-->
-                    </ul>
-
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>Saved Appointments</span>
-                        <a class="mx-0 d-flex align-items-center text-muted" href="#">
-                            <span data-feather="calendar"></span>
-                        </a>
-                        <button type="button" class="btn mx-0 d-flex align-items-center text-muted" data-toggle="modal" data-target="#appointmentModal">
-                            <span data-feather="plus-circle"></span>
-                        </button>
-                    </h6>
-
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item m-1" th:each="appointment : ${appointments}">
-                            <div class="row">
-                                <span data-feather="file-text"></span>
-                                <a class="p-0 m-0" href='#' aria-hidden='true'>
-                                    <span th:text="${appointment.name + ' - ' + appointment.location}"
-                                          class="col-md-9" th:remove="tag"></span>
-                                </a>
-                            </div>
-                            <sub th:text="${#dates.year(appointment.date) + '-' +
-                            #dates.month(appointment.date) + '-' +
-                            #dates.day(appointment.date) + ': ' +
-                            appointment.vehicle.make + ' ' + appointment.vehicle.model + ' #' + appointment.vehicle.id
-                            }" th:remove="tag" class="align-items-center mb-2 text-muted">2000-12-12</sub>
-                        </li>
-                    </ul>
                 </div>
             </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+                    <h1 class="h2">Fleet</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <button class="btn btn-sm btn-outline-secondary">Share</button>
@@ -135,38 +100,24 @@
                     </div>
                 </div>
 
-                <canvas class="my-4" id="myChart" width="900" height="320"></canvas>
+                <div id="accordion">
+                    <div class="card" th:each="vehicle : ${vehicles}">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button th:text="${vehicle.make + ' ' + vehicle.model}" class="btn btn-link collapsed"
+                                        th:data-target="${'#collapse' + vehicle.id}" aria-expanded="false"
+                                        th:aria-controls="${'collapse' + vehicle.id}" data-toggle="collapse">
+                                    Collapsible Group Item
+                                </button>
+                            </h5>
+                        </div>
 
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                    <h2>Upcoming Maintenance</h2>
-                    <input type="text" name="birthdate" value="10/24/1984" />
-                </div>
-
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Provider</th>
-                            <th>Vehicle</th>
-                            <th>Date</th>
-                            <th>Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="maintenanceItem : ${maintenanceItems}">
-                            <td width="20px" th:text="${maintenanceItem.id}"></td>
-                            <td th:text="${maintenanceItem.name}"></td>
-                            <td th:text="${maintenanceItem.description}"></td>
-                            <td th:text="${maintenanceItem.provider}"></td>
-                            <td th:text="${maintenanceItem.vehicle.make + ' ' + maintenanceItem.vehicle.model + ' #' + maintenanceItem.vehicle.id}"></td>
-                            <td th:text="${#dates.day(maintenanceItem.appointment.date) + ' ' + #dates.monthNameShort(maintenanceItem.appointment.date)}"></td>
-                            <td th:text="${maintenanceItem.price} + '$'"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <div th:id="${'collapse' + vehicle.id}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                Contents of collapse here
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -182,24 +133,6 @@
 <script>
     feather.replace()
 </script>
-
-<!-- Graphs -->
-<!--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.1/dist/Chart.min.js"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-
-<!--<script th:inline="javascript" th:src="@{/js/drawChart.js}">-->
-<!--        /*<![CDATA[*/-->
-<!--        var yAxisData = /*[[ ${costs} ]]*/[];-->
-<!--        drawchart(yAxisData);-->
-<!--        /*]]>*/-->
-<!--</script>-->
-
-<script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
-    var yAxisData = /*[[ ${costs} ]]*/[];
-    /*]]>*/
-</script>
-<script src="/js/drawChart.js"></script>
 
 </body>
 </html>
