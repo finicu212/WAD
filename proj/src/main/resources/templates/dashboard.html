@@ -183,40 +183,26 @@
 <!-- Icons -->
 <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 <script>
-      feather.replace()
-    </script>
+    feather.replace()
+</script>
 
 <!-- Graphs -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.1/dist/Chart.min.js"></script>
-<script>
-  var ctx = document.getElementById("myChart");
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      datasets: [{
-        data: [250, 320, 240, 255, 180, 10, 20],
-        lineTension: 0,
-        backgroundColor: '#007bff',
-        borderColor: '#007bff',
-        borderWidth: 4,
-        pointBackgroundColor: '#007bff'
-      }]
-    },
-    options: {
-      scales: {
-        yAxes: {
-          ticks: {
-            beginAtZero: true
-          }
-        }
-      },
-      legend: {
-        display: false,
-      }
-    }
-  });
+<!--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.1/dist/Chart.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+<!--<script th:inline="javascript" th:src="@{/js/drawChart.js}">-->
+<!--        /*<![CDATA[*/-->
+<!--        var yAxisData = /*[[ ${costs} ]]*/[];-->
+<!--        drawchart(yAxisData);-->
+<!--        /*]]>*/-->
+<!--</script>-->
+
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    var yAxisData = /*[[ ${costs} ]]*/[];
+    /*]]>*/
 </script>
+<script src="/js/drawChart.js"></script>
 
 </body>
 </html>
