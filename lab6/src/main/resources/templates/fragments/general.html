@@ -1,0 +1,20 @@
+<div th:fragment="top">
+<div class="header">
+  <img th:src="@{/images/companyLogo.jpg}" width="100px"  />
+  <span class="header-text">COMPANY NAME</span>
+</div>
+<p sec:authorize="hasRole('ROLE_USER')">You are a user</p>
+<p sec:authorize="hasRole('ROLE_ADMIN')">You are an admin</p>
+<p sec:authorize="!isAuthenticated()">You are a guest</p>
+<p sec:authorize="isAuthenticated()">You are logged in</p>
+<nav>
+  <a href="/">Home</a>
+  <a href="/products" sec:authorize="hasRole('ROLE_USER')">Products</a>
+  <a href="/cart" sec:authorize="isAuthenticated()">See cart</a>
+  <a href="/profile" sec:authorize="hasRole('ROLE_USER')">Profile</a>
+  <a href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">Admin</a>
+  <a href="/logout" sec:authorize="isAuthenticated()">Logout</a>
+  <a href="/login" sec:authorize="!isAuthenticated()">Login</a>
+  <a href="/login" sec:authorize="!isAuthenticated()">Register</a>
+</nav>
+</div>
