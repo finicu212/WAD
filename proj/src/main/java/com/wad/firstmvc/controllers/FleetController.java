@@ -20,10 +20,10 @@ import java.util.Random;
 @Controller
 @RequestMapping("/fleet")
 public class FleetController {
-    @Autowired
-    MaintenanceItemService maintenanceItemService;
-    @Autowired
-    AppointmentRepository appointmentRepository;
+//    @Autowired
+//    MaintenanceItemService maintenanceItemService;
+//    @Autowired
+//    AppointmentRepository appointmentRepository;
     @Autowired
     VehicleRepository vehicleRepository;
 

@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.Cascade;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,6 +23,7 @@ public class Appointment {
     private Long id;
     private String name, location;
     private float workPrice;
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private Date date;
     @OneToMany(mappedBy = "appointment", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<MaintenanceItem> maintenanceItems = new HashSet<>();

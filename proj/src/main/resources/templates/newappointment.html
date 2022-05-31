@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" href="#" />
+    <meta charset="UTF-8">
+    <title>New appointment</title>
+</head>
+<body>
+
+<form method="post" th:object="${appointment}">
+    <input id="make" placeholder="Name" th:field="*{name}"/>
+    <input id="model" placeholder="Location" th:field="*{location}"/>
+    <input id="engineCapacity" placeholder="Price of manhours (work price)" th:field="*{workPrice}"/>
+    <select id="vehicle" placeholder="Select vehicle" th:field="*{vehicle}">
+        <option th:each="vehicle_choice : ${vehicles}" th:value="${vehicle_choice.id}"
+                th:text="${vehicle_choice.make + ' ' + vehicle_choice.model}">
+        </option>
+    </select>
+    <select id="maintenance" placeholder="Select items to fix (CTRL for multiple)" multiple th:field="*{maintenanceItems}">
+        <option th:each="maintenanceItem_choice : ${maintenanceItems}" th:value="${maintenanceItem_choice.id}"
+                th:text="${maintenanceItem_choice.name}">
+        </option>
+    </select>
+    <label for="date">Appointment date:</label>
+    <input type="date" id="date" th:field="*{date}"
+           value="2022-05-31"
+           min="2022-01-01" max="2024-12-31">
+    <input type="submit" class="btn btn-primary" value="Add appointment">
+</form>
+
+</body>
+</html>

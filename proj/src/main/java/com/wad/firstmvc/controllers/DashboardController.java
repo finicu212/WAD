@@ -24,11 +24,22 @@ public class DashboardController {
         Calendar cal = Calendar.getInstance();
         float cost = 0.0f;
 
-        for (MaintenanceItem mi : maintenanceItems) {
-            Appointment a = mi.getAppointment();
+        for (Appointment a : appointments) {
             cal.setTime(a.getDate());
-            if (cal.get(Calendar.MONTH) == month) cost += mi.getPrice() + a.getWorkPrice();
+            if (cal.get(Calendar.MONTH) != month) continue;
+
+            float maintenanceItemsCost = 0.0f;
+            for (MaintenanceItem mi : a.getVehicle().getMaintenanceItems())
+                maintenanceItemsCost += mi.getPrice();
+
+            cost += maintenanceItemsCost + a.getWorkPrice();
         }
+
+//        for (MaintenanceItem mi : maintenanceItems) {
+//            Appointment a = mi.getAppointment();
+//            cal.setTime(a.getDate());
+//            if (cal.get(Calendar.MONTH) == month) cost += mi.getPrice() + a.getWorkPrice();
+//        }
 
         return cost;
     }

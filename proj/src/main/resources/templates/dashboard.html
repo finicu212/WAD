@@ -17,28 +17,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<!-- Modal for adding new appointment -->
-<div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add new appointment</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Helloooooooooooo!!!!!!!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <body>
 <div class="container-fluid vh-100">
     <div class="row">
@@ -100,9 +78,9 @@
                         <a class="mx-0 d-flex align-items-center text-muted" href="#">
                             <span data-feather="calendar"></span>
                         </a>
-                        <button type="button" class="btn mx-0 d-flex align-items-center text-muted" data-toggle="modal" data-target="#appointmentModal">
+                        <a th:href="@{'/appointments/new'}" type="button" class="btn mx-0 d-flex align-items-center text-muted">
                             <span data-feather="plus-circle"></span>
-                        </button>
+                        </a>
                     </h6>
 
                     <ul class="nav flex-column mb-2">
