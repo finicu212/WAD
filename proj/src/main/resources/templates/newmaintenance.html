@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="shortcut icon" href="#" />
+    <meta charset="UTF-8">
+    <title>New maintenance</title>
+</head>
+<body>
+
+<form method="post" th:object="${maintenanceItem}">
+    <input id="name" placeholder="Name" th:field="*{name}"/>
+    <textarea id="description" placeholder="Description" th:field="*{description}" rows="2" cols="20"></textarea>
+    <input id="provider" placeholder="Provider" th:field="*{provider}"/>
+    <input id="price" placeholder="Price" th:field="*{price}"/>
+    <select id="vehicle" placeholder="Select vehicle" th:field="*{vehicle}">
+        <option th:each="vehicle_choice : ${vehicles}" th:value="${vehicle_choice.id}"
+                th:text="${vehicle_choice.make + ' ' + vehicle_choice.model}">
+        </option>
+    </select>
+    <input type="submit" class="btn btn-primary" value="Add appointment">
+</form>
+
+</body>
+</html>

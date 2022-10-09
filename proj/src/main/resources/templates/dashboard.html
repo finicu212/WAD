@@ -140,7 +140,12 @@
                             <td th:text="${maintenanceItem.description}"></td>
                             <td th:text="${maintenanceItem.provider}"></td>
                             <td th:text="${maintenanceItem.vehicle.make + ' ' + maintenanceItem.vehicle.model + ' #' + maintenanceItem.vehicle.id}"></td>
-                            <td th:text="${#dates.day(maintenanceItem.appointment.date) + ' ' + #dates.monthNameShort(maintenanceItem.appointment.date)}"></td>
+                            <td th:text="${maintenanceItem.appointment != null} ?
+                                            ${'Scheduled: ' +
+                                            #dates.day(maintenanceItem.appointment.date) + ' ' +
+                                            #dates.monthNameShort(maintenanceItem.appointment.date)} :
+                                            'Not scheduled yet'
+                                            "></td>
                             <td th:text="${maintenanceItem.price} + '$'"></td>
                         </tr>
                         </tbody>

@@ -26,7 +26,7 @@ public class DashboardController {
 
         for (Appointment a : appointments) {
             cal.setTime(a.getDate());
-            if (cal.get(Calendar.MONTH) != month) continue;
+            if (cal.get(Calendar.MONTH) != (month - 1)) continue;
 
             float maintenanceItemsCost = 0.0f;
             for (MaintenanceItem mi : a.getVehicle().getMaintenanceItems())
@@ -38,7 +38,7 @@ public class DashboardController {
 //        for (MaintenanceItem mi : maintenanceItems) {
 //            Appointment a = mi.getAppointment();
 //            cal.setTime(a.getDate());
-//            if (cal.get(Calendar.MONTH) == month) cost += mi.getPrice() + a.getWorkPrice();
+//            if (cal.get(Calendar.MONTH + 1) == month) cost += mi.getPrice() + a.getWorkPrice();
 //        }
 
         return cost;

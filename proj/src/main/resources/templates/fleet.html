@@ -85,17 +85,20 @@
                                     <li th:text="${'Engine Capacity: ' + vehicle.engineCapacity}"></li>
                                     <div class="btn-toolbar mb-2 mb-md-0">
                                         <div class="btn-group mr-2">
-                                            <a type="button" th:href="@{'/fleet/new'}" class="btn btn-sm btn-outline-secondary">Add Maintenance</a>
+                                            <a type="button" th:href="@{'/maintenance/new'}" class="btn btn-sm btn-outline-secondary">Add Maintenance</a>
                                         </div>
                                     </div>
                                     <li th:each="maintenanceItem : ${vehicle.maintenanceItems}">
                                         <span th:text="${'Maintenance: ' + maintenanceItem.name}"></span>
                                         <ul>
                                             <li th:text="${'Cost: ' + maintenanceItem.price}"></li>
-                                            <li th:text="${'Scheduled: ' +
+                                            <li th:text="${maintenanceItem.appointment != null} ?
+                                            ${'Scheduled: ' +
                                             #dates.year(maintenanceItem.appointment.date) + '-' +
                                             #dates.month(maintenanceItem.appointment.date) + '-' +
-                                            #dates.day(maintenanceItem.appointment.date)}">
+                                            #dates.day(maintenanceItem.appointment.date)} :
+                                            'Not scheduled yet'
+                                            ">
                                             </li>
                                         </ul>
                                     </li>
