@@ -6,6 +6,7 @@ import com.example.meetingrooms.entity.Response;
 import com.example.meetingrooms.interfaces.MeetingRoomService;
 import com.example.meetingrooms.interfaces.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/reservation")
 public class ReservationsController {
 
+    @Qualifier("reservationsServiceImp")
     @Autowired
     private ReservationService reservationServiceImp;
 
