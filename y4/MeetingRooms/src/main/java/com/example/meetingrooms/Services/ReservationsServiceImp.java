@@ -2,7 +2,6 @@ package com.example.meetingrooms.Services;
 
 import com.example.meetingrooms.entity.MeetingRoom;
 import com.example.meetingrooms.entity.Reservations;
-import com.example.meetingrooms.exception.ResourceNotFoundException;
 import com.example.meetingrooms.interfaces.ReservationService;
 import com.example.meetingrooms.repository.MeetingRoomRepository;
 import com.example.meetingrooms.repository.ReservationsRepository;
@@ -12,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -62,7 +58,7 @@ public class ReservationsServiceImp implements ReservationService {
         if (optReservation.isPresent()) {
             return optReservation.get();
         } else {
-            throw new ResourceNotFoundException("Reservation", "Id", id);
+            throw new MissingResourceException("Reservation", "Id", id.toString());
         }
     }
 
@@ -73,7 +69,8 @@ public class ReservationsServiceImp implements ReservationService {
             reservationsRepository.delete(optReservation.get());
             return true;
         } else {
-            throw new ResourceNotFoundException("Reservation", "Id", id);
+            throw new MissingResourceException("Reservation", "Id", id.toString());
+//            throw new MissingResourceException("Reservation", "Id", id.toString());
         }
     }
 

@@ -1,17 +1,16 @@
 package com.example.meetingrooms.Services;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
+import com.example.meetingrooms.entity.MeetingRoom;
+import com.example.meetingrooms.interfaces.MeetingRoomService;
+import com.example.meetingrooms.repository.MeetingRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.meetingrooms.entity.MeetingRoom;
-import com.example.meetingrooms.exception.ResourceNotFoundException;
-import com.example.meetingrooms.interfaces.MeetingRoomService;
-import com.example.meetingrooms.repository.MeetingRoomRepository;
+import java.util.Date;
+import java.util.List;
+import java.util.MissingResourceException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -49,7 +48,7 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 		    if (optMeetingRoom.isPresent()) {
 		        return optMeetingRoom.get();
 		    } else {
-		       throw new ResourceNotFoundException("MeetingRoom", "Id", id);
+		       throw new MissingResourceException("MeetingRoom", "Id", id.toString());
 		    }
 	}
 
@@ -65,7 +64,7 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 	        MeetingRoom updatedroom = meetingRoomRepository.save(newRoom);
 	        return updatedroom;
 	    } else {
-	    	throw new ResourceNotFoundException("MeetingRoom", "Id",id);
+	    	throw new MissingResourceException("MeetingRoom", "Id", id.toString());
 	    }
 	}
 
@@ -76,7 +75,7 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 	    	meetingRoomRepository.delete(optMeetingRoom.get());
 	        return true;
 	    } else {
-	       throw new ResourceNotFoundException("MeetingRoom", "Id",id);
+	       throw new MissingResourceException("MeetingRoom", "Id", id.toString());
 	    }
 	}
 
