@@ -1,9 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Meeting Rooms</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Meeting Rooms</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+
+function updateRoom() {
+    let updateRoom = document.getElementById("updateForm").elements;
+    let url = '/rooms/' + updateRoom.id.value;
+    let data = {
+        name: updateRoom.name.value,
+        capacity: updateRoom.capacity.value,
+        features: updateRoom.features.value
+    };
+
+    fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(() => {
+        $('#updateModal').modal('hide');
+        window.location.href = '/rooms';
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function deleteRoom(id) {
+    if (confirm(`Are you sure you want to delete the room ${id}?`)) {
+        let url = `/rooms/${id}`;
+        fetch(url, {
+            method: 'DELETE',
+        })
+        .then(() => {
+            window.location.href = '/rooms';
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+</script>
 </head>
 <body>
 <div class="container">
@@ -21,11 +61,11 @@
             <td th:text="${room.name}"></td>
             <td th:text="${room.capacity}"></td>
             <td>
-                <a th:href="@{/rooms/{id}(id=${room.id})}" class="btn btn-primary">
-                    <i data-feather="edit"></i>
+                <a class="btn btn-primary" th:attr="href=|/rooms/${room.id}/edit|">
+                    <i data-feather="edit"></i>Update
                 </a>
-                <a th:href="@{/rooms/{id}(id=${room.id})}" class="btn btn-danger" onclick="return confirm('Are you sure?');">
-                    <i data-feather="trash-2"></i>
+                <a class="btn btn-danger" th:attr="onclick=|deleteRoom('${room.id}')|">
+                    <i data-feather="trash-2"></i>Delete
                 </a>
             </td>
         </tr>
@@ -36,5 +76,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity></script>
+<script>
+feather.replace()
+</script>
 </body>
 </html>

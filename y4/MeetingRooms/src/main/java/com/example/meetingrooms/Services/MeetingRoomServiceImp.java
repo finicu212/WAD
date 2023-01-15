@@ -60,13 +60,13 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 
 	@Override
 	public Boolean deleteRoom(Integer id) {
-		Optional<MeetingRoom> optMeetingRoom = meetingRoomRepository.findById(id); // returns java8 optional
-	    if (optMeetingRoom.isPresent()) {
-	    	meetingRoomRepository.delete(optMeetingRoom.get());
-	        return true;
-	    } else {
-	       throw new MissingResourceException("MeetingRoom", "Id", id.toString());
-	    }
+		if (!meetingRoomRepository.existsById(id)) {
+			System.out.printf("DELETE: Room %d doesnt exist\n", id);
+			return false;
+		}
+		System.out.printf("DELETE: Room %d deleted\n", id);
+		meetingRoomRepository.deleteById(id);
+		return true;
 	}
 
 	@Override
