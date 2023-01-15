@@ -21,6 +21,13 @@ public class MeetingRoomController {
         return "rooms";
     }
 
+    @GetMapping("/rooms/add")
+    public String addRoomForm(Model model) {
+        List<MeetingRoom> rooms = meetingRoomService.getAllRooms();
+        model.addAttribute("rooms", rooms);
+        return "rooms";
+    }
+
     @PostMapping("/rooms")
     public String addRoom(@ModelAttribute MeetingRoom room) {
         meetingRoomService.addRoom(room);
