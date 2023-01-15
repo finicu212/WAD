@@ -3,10 +3,14 @@ package com.example.meetingrooms.controllers;
 import com.example.meetingrooms.Services.MeetingRoomService;
 //import com.example.meetingrooms.Services.MeetingRoomServiceImp;
 import com.example.meetingrooms.entity.RoomRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -33,7 +37,14 @@ public class RoomRequestController {
                                 @RequestParam("roomId") Long roomId) {
 
         roomRequest.setRoomId(roomId);
-        jmsTemplate.convertAndSend("RoomRequests", roomRequest);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        try {
+            jmsTemplate.convertAndSend("RoomRequests", objectMapper.writeValueAsString(roomRequest));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
         return "redirect:/request";
     }

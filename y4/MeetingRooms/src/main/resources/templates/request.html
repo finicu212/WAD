@@ -31,8 +31,8 @@
         <td><input type="datetime-local" th:field="*{startTime}"></td>
         <td><input type="datetime-local" th:field="*{endTime}"></td>
         <td>
-          <input type="hidden" th:field="*{roomId}" th:value="${room.id}"/>
-          <button class="btn btn-primary" th:value="${room.id}" name="roomId" type="submit">
+          <input type="hidden" name="roomId" th:value="${room.id}"/>
+          <button class="btn btn-primary" type="submit">
             <i data-feather="plus"></i>Request
           </button>
         </td>
