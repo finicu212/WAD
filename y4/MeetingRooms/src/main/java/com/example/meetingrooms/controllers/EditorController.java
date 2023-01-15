@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class MeetingRoomController {
+@RequestMapping("/editor")
+public class EditorController {
     @Autowired
     private MeetingRoomServiceImp meetingRoomService;
 
@@ -18,26 +19,26 @@ public class MeetingRoomController {
     public String getAllRooms(Model model) {
         List<MeetingRoom> rooms = meetingRoomService.getAllRooms();
         model.addAttribute("rooms", rooms);
-        return "rooms";
+        return "editor/rooms";
     }
 
     @GetMapping("/rooms/add")
     public String addRoomForm(Model model) {
         model.addAttribute("room", new MeetingRoom());
-        return "addroom";
+        return "editor/add-room";
     }
 
     @PostMapping("/rooms")
     public String addRoom(@ModelAttribute MeetingRoom room) {
         meetingRoomService.addRoom(room);
-        return "redirect:/rooms";
+        return "redirect:/editor/rooms";
     }
 
     @GetMapping("/rooms/{id}/edit")
     public String updateRoomForm(@PathVariable("id") int id, Model model) {
         MeetingRoom room = meetingRoomService.findById(id);
         model.addAttribute("room", room);
-        return "updateroom";
+        return "editor/update-room";
     }
 
     @PutMapping("/rooms/{id}")

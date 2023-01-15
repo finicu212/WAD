@@ -1,7 +1,6 @@
 package com.example.meetingrooms.Services;
 
 import com.example.meetingrooms.entity.MeetingRoom;
-import com.example.meetingrooms.interfaces.MeetingRoomService;
 import com.example.meetingrooms.repository.MeetingRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

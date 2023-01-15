@@ -1,4 +1,4 @@
-package com.example.meetingrooms.interfaces;
+package com.example.meetingrooms.Services;
 
 import com.example.meetingrooms.entity.Reservations;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,6 @@ package com.example.meetingrooms.Services;
 
 import com.example.meetingrooms.entity.MeetingRoom;
 import com.example.meetingrooms.entity.Reservations;
-import com.example.meetingrooms.interfaces.ReservationService;
 import com.example.meetingrooms.repository.MeetingRoomRepository;
 import com.example.meetingrooms.repository.ReservationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

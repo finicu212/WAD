@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Update Meeting Room</title>
+  <title>Add Meeting Room</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
-  <h1 class="text-center">Update Meeting Room</h1>
-  <form th:action="@{/rooms/{id}(id=${room.id})}" th:object="${room}" th:method="put">
+  <h1 class="text-center">Add Meeting Room</h1>
+  <form th:action="@{/editor/rooms}" th:object="${room}" method="post">
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" class="form-control" id="name" th:field="*{name}"/>
@@ -22,7 +22,7 @@
       <textarea class="form-control" id="features" th:field="*{features}"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="/" class="btn btn-secondary">Cancel</a>
+    <a href="/editor/rooms" class="btn btn-secondary">Cancel</a>
   </form>
 </div>
 </body>

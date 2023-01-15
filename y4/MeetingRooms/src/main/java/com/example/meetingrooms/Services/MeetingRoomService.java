@@ -1,4 +1,4 @@
-package com.example.meetingrooms.interfaces;
+package com.example.meetingrooms.Services;
 
 import java.util.Date;
 import java.util.List;
