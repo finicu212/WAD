@@ -11,11 +11,10 @@ import com.example.meetingrooms.entity.MeetingRoom;
 @Service
 @Transactional
 public interface MeetingRoomService {
-	
-	public void createMeetingRoom(MeetingRoom meetingroom);
-    public List<MeetingRoom> getMeetingRoom();
-    public MeetingRoom findById(Integer id);
-    public MeetingRoom update(MeetingRoom meetingroom, Integer id);
-    public Boolean deleteMeetingRoomById(Integer id);
-    public List<MeetingRoom> findMeetingRoomAvailable(Date db, Date de);
+	void addRoom(MeetingRoom meetingroom);
+    List<MeetingRoom> getAllRooms();
+    MeetingRoom findById(Integer id);
+    MeetingRoom updateRoom(MeetingRoom meetingroom, Integer id);
+    Boolean deleteRoom(Integer id);
+    List<MeetingRoom> findMeetingRoomAvailable(Date db, Date de);
 }

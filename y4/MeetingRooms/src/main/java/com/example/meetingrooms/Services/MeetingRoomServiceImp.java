@@ -32,13 +32,13 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 
 
 	@Override
-	public void createMeetingRoom(MeetingRoom meetingroom) {
+	public void addRoom(MeetingRoom meetingroom) {
 		meetingRoomRepository.save(meetingroom);
 		
 	}
 
 	@Override
-	public List<MeetingRoom> getMeetingRoom() {
+	public List<MeetingRoom> getAllRooms() {
 		return (List<MeetingRoom>) meetingRoomRepository.findAll();
 	}
 
@@ -53,23 +53,13 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 	}
 
 	@Override
-	public MeetingRoom update(MeetingRoom meetingroom, Integer id) {
-		Optional<MeetingRoom> optMeetingRoom = meetingRoomRepository.findById(id); // returns java8 optional
-	    if (optMeetingRoom.isPresent()) {
-	    	MeetingRoom newRoom = optMeetingRoom.get();
-	    	newRoom.setName(meetingroom.getName());
-	    	newRoom.setCapacity(meetingroom.getCapacity());
-	    	newRoom.setLocation(meetingroom.getLocation());
-
-	        MeetingRoom updatedroom = meetingRoomRepository.save(newRoom);
-	        return updatedroom;
-	    } else {
-	    	throw new MissingResourceException("MeetingRoom", "Id", id.toString());
-	    }
+	public MeetingRoom updateRoom(MeetingRoom meetingroom, Integer id) {
+		meetingroom.setId(id);
+		return meetingRoomRepository.save(meetingroom);
 	}
 
 	@Override
-	public Boolean deleteMeetingRoomById(Integer id) {
+	public Boolean deleteRoom(Integer id) {
 		Optional<MeetingRoom> optMeetingRoom = meetingRoomRepository.findById(id); // returns java8 optional
 	    if (optMeetingRoom.isPresent()) {
 	    	meetingRoomRepository.delete(optMeetingRoom.get());
