@@ -21,8 +21,8 @@ public class MeetingRoom extends AuditEntity{
 	@Column(name="capacity")
 	private Integer capacity;
 	
-	@Column(name="location")
-	private String location;
+	@Column(name="features")
+	private String features;
 
 	public MeetingRoom() {
 		super();
@@ -34,14 +34,14 @@ public class MeetingRoom extends AuditEntity{
 		this.id = id;
 		this.name = name;
 		this.capacity = capacity;
-		this.location = location;
+		this.features = features;
 	}
 
 	public MeetingRoom( String name, Integer capacity, String location) {
 		super();
 		this.name = name;
 		this.capacity = capacity;
-		this.location = location;
+		this.features = features;
 	}
 
 	public Integer getId() {
@@ -68,12 +68,12 @@ public class MeetingRoom extends AuditEntity{
 		this.capacity = capacity;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getFeatures() {
+		return features;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setFeatures(String features) {
+		this.features = features;
 	}
 	
 	
