@@ -1,11 +1,13 @@
 package com.example.meetingrooms.Services;
 
 import com.example.meetingrooms.entity.MeetingRoom;
+import com.example.meetingrooms.entity.TimeInterval;
 import com.example.meetingrooms.repository.MeetingRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.MissingResourceException;
@@ -28,8 +30,6 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
 	@Override
 	public void addRoom(MeetingRoom meetingroom) {
 		meetingRoomRepository.save(meetingroom);
@@ -73,5 +73,13 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 		return (List<MeetingRoom>) meetingRoomRepository.findMeetingRoomAvailable(db, de);
 	}
 
+	public void markRoomAsUnavailable(int roomId, LocalDateTime startTime, LocalDateTime endTime) {
+		MeetingRoom room = meetingRoomRepository.findById(roomId).orElse(null);
+		if (room == null) {
+			return;
+		}
+		room.getUnavailableIntervals().add(new TimeInterval(startTime, endTime));
+		meetingRoomRepository.save(room);
+	}
 
 }

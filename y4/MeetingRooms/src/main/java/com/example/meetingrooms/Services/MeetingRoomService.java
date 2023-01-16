@@ -1,5 +1,6 @@
 package com.example.meetingrooms.Services;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,4 +18,5 @@ public interface MeetingRoomService {
     MeetingRoom updateRoom(MeetingRoom meetingroom, Integer id);
     Boolean deleteRoom(Integer id);
     List<MeetingRoom> findMeetingRoomAvailable(Date db, Date de);
+    void markRoomAsUnavailable(int roomId, LocalDateTime startTime, LocalDateTime endTime);
 }

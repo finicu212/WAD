@@ -1,11 +1,8 @@
 package com.example.meetingrooms.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="meeting_room")
@@ -24,24 +21,21 @@ public class MeetingRoom {
 	@Column(name="features")
 	private String features;
 
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<TimeInterval> unavailableIntervals;
+
 	public MeetingRoom() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public MeetingRoom(Integer id, String name, Integer capacity, String location) {
+	public MeetingRoom(Integer id, String name, Integer capacity, String features) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.capacity = capacity;
 		this.features = features;
-	}
-
-	public MeetingRoom( String name, Integer capacity, String location) {
-		super();
-		this.name = name;
-		this.capacity = capacity;
-		this.features = features;
+		this.unavailableIntervals = new ArrayList<>();
 	}
 
 	public Integer getId() {
@@ -75,7 +69,12 @@ public class MeetingRoom {
 	public void setFeatures(String features) {
 		this.features = features;
 	}
-	
-	
 
+	public List<TimeInterval> getUnavailableIntervals() {
+		return unavailableIntervals;
+	}
+
+	public void setUnavailableIntervals(List<TimeInterval> unavailableIntervals) {
+		this.unavailableIntervals = unavailableIntervals;
+	}
 }
