@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Room Request Approval</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center">Approve Room Requests</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Room Name</th>
+      <th>Capacity</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="roomRequest : ${roomRequests}">
+      <td th:text="${roomRequest.room.name}"></td>
+      <td th:text="${roomRequest.room.capacity}"></td>
+      <td th:text="${roomRequest.startTime}"></td>
+      <td th:text="${roomRequest.endTime}"></td>
+      <td>
+        <form th:action="@{/approver/approve}" method="post">
+          <input type="hidden" name="roomRequestId" th:value="${roomRequest.id}"/>
+          <button class="btn btn-success" type="submit">Approve</button>
+        </form>
+        <form th:action="@{/approver/deny}" method="post">
+          <input type="hidden" name="roomRequestId" th:value="${roomRequest.id}"/>
+          <button class="btn btn-danger" type="submit">Deny</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

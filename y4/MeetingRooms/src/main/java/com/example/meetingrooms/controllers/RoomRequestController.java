@@ -1,5 +1,6 @@
 package com.example.meetingrooms.controllers;
 
+import com.example.meetingrooms.MeetingRoomApplication;
 import com.example.meetingrooms.Services.MeetingRoomService;
 //import com.example.meetingrooms.Services.MeetingRoomServiceImp;
 import com.example.meetingrooms.entity.RoomRequest;
@@ -8,6 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
+import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.converter.MessageType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -31,7 +35,12 @@ public class RoomRequestController {
         model.addAttribute("roomRequest", new RoomRequest());
         return "request";
     }
-
+    public MessageConverter messageConverter() {
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        converter.setTargetType(MessageType.TEXT);
+        converter.setTypeIdPropertyName("_type");
+        return converter;
+    }
     @PostMapping("/submit")
     public String submitRequest(@ModelAttribute("roomRequest") RoomRequest roomRequest,
                                 @RequestParam("roomId") Long roomId) {
@@ -42,6 +51,7 @@ public class RoomRequestController {
         objectMapper.registerModule(new JavaTimeModule());
         try {
             jmsTemplate.convertAndSend("RoomRequests", objectMapper.writeValueAsString(roomRequest));
+            jmsTemplate.setMessageConverter(messageConverter());
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

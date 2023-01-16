@@ -44,7 +44,6 @@ public class MeetingRoomApplication {
 		DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
 		configurer.configure(factory, connectionFactory);
 		factory.setPubSubDomain(true);
-//        factory.setSubscriptionDurable(true);
 		return factory;
 	}
 
