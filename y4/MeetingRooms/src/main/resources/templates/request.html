@@ -14,13 +14,25 @@
   <a href="/" class="btn btn-secondary inline my-2">Home</a>
   <h1 class="text-center float-right">Request a Meeting Room</h1>
   <form th:action="@{/request/submit}" th:object="${roomRequest}" method="post">
+    <table class="dates">
+      <thead>
+      <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <input type="datetime-local" th:field="*{startTime}">
+        <input type="datetime-local" th:field="*{endTime}">
+      </tr>
+      </tbody>
+    </table>
     <table class="table">
       <thead>
       <tr>
         <th>Room Name</th>
         <th>Capacity</th>
-        <th>Start Time</th>
-        <th>End Time</th>
         <th>Actions</th>
       </tr>
       </thead>
@@ -28,17 +40,13 @@
       <tr th:each="room : ${rooms}">
         <td th:text="${room.name}"></td>
         <td th:text="${room.capacity}"></td>
-        <td><input type="datetime-local" th:field="*{startTime}"></td>
-        <td><input type="datetime-local" th:field="*{endTime}"></td>
-        <td>
-          <input type="hidden" name="roomId" th:value="${room.id}"/>
-          <button class="btn btn-primary" type="submit">
-            <i data-feather="plus"></i>Request
-          </button>
-        </td>
+        <td><input type="radio" name="roomId" th:value="${room.id}" th:required="required"/></td>
       </tr>
       </tbody>
     </table>
+    <button class="btn btn-primary" type="submit">
+      <i data-feather="plus"></i>Request
+    </button>
   </form>
 </div>
 

@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 public class RoomRequest {
     @Id
     @GeneratedValue
+    private Long id;
+
     private Long roomId;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime startTime;
@@ -26,7 +28,8 @@ public class RoomRequest {
         this.approved = false;
     }
 
-    public RoomRequest(LocalDateTime startTime, LocalDateTime endTime) {
+    public RoomRequest(Long roomId, LocalDateTime startTime, LocalDateTime endTime) {
+        this.roomId = roomId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.approved = false;
@@ -64,4 +67,11 @@ public class RoomRequest {
         this.approved = approved;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

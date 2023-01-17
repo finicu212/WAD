@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/approver")
@@ -27,16 +29,17 @@ public class ApproveDenyController {
 
     @GetMapping
     public String approveDenyForm(Model model) {
+        Map<Long, MeetingRoom> rooms = new HashMap<>();
         List<RoomRequest> pendingRequests = roomRequestService.getPendingRequests();
-        List<MeetingRoom> rooms = new ArrayList<>();
         for (RoomRequest request : pendingRequests) {
-            System.out.printf("In a request: %d\n", request.getRoomId());
-            rooms.add(meetingRoomService.findById(Math.toIntExact(request.getRoomId())));
+            MeetingRoom room = meetingRoomService.findById(Math.toIntExact(request.getRoomId()));
+            rooms.put(request.getId(), room);
         }
         model.addAttribute("roomRequests", pendingRequests);
         model.addAttribute("rooms", rooms);
         return "approver";
     }
+
 
     @PostMapping("/approve")
     public String approveRequest(@RequestParam("requestId") Long requestId) {
