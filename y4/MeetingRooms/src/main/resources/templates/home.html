@@ -32,27 +32,31 @@
       </a>
     </div>
   </div>
-  <div id="calendar"></div>
+  <div id="calendar" class="my-5"></div>
 </div>
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
   feather.replace()
-
+</script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+  var events = /*[[${events}]]*/[];
   $(document).ready(function() {
     $('#calendar').fullCalendar({
-      events: '/calendar/events',
+      events: events,
       header: {
         left: 'prev,next today',
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
       },
-      defaultView: 'month',
+      defaultView: 'agendaDay',
       timeFormat: 'H:mm',
       eventRender: function(event, element) {
         element.find('.fc-title').append("<br/>" + event.description);
       }
     });
   });
+/*]]>*/
 </script>
 </body>
 </html>

@@ -24,6 +24,7 @@ public class LoggerListener {
         try {
             roomRequest = RoomRequestConverter.fromJson(strRequest);
             roomRequestService.saveRequest(roomRequest);
+            System.out.println("SaveD!!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
