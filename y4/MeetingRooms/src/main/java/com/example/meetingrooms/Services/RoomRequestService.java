@@ -21,7 +21,7 @@ public class RoomRequestService {
         return roomRequestRepository.findById(requestId).orElse(null);
     }
 
-    public void updateRequest(RoomRequest roomRequest) {
+    public void saveRequest(RoomRequest roomRequest) {
         roomRequestRepository.save(roomRequest);
     }
 }

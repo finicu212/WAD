@@ -23,7 +23,7 @@ public class RoomRequest {
 
     public RoomRequest() {
         super();
-        // TODO Auto-generated constructor stub
+        this.approved = false;
     }
 
     public RoomRequest(LocalDateTime startTime, LocalDateTime endTime) {

@@ -19,17 +19,17 @@
     </thead>
     <tbody>
     <tr th:each="roomRequest : ${roomRequests}">
-      <td th:text="${roomRequest.room.name}"></td>
-      <td th:text="${roomRequest.room.capacity}"></td>
+      <td th:text="${rooms[roomRequests.indexOf(roomRequest)].name}"></td>
+      <td th:text="${rooms[roomRequests.indexOf(roomRequest)].name}"></td>
       <td th:text="${roomRequest.startTime}"></td>
       <td th:text="${roomRequest.endTime}"></td>
       <td>
         <form th:action="@{/approver/approve}" method="post">
-          <input type="hidden" name="roomRequestId" th:value="${roomRequest.id}"/>
+          <input type="hidden" name="requestId" th:value="${roomRequest.roomId}"/>
           <button class="btn btn-success" type="submit">Approve</button>
         </form>
         <form th:action="@{/approver/deny}" method="post">
-          <input type="hidden" name="roomRequestId" th:value="${roomRequest.id}"/>
+          <input type="hidden" name="requestId" th:value="${roomRequest.roomId}"/>
           <button class="btn btn-danger" type="submit">Deny</button>
         </form>
       </td>

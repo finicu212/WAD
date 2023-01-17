@@ -20,9 +20,10 @@ public class LoggerListener {
 
     @JmsListener(destination = "RoomRequests", containerFactory = "myFactory")
     public void receiveMessage(String strRequest) {
-        RoomRequest roomRequest = null;
+        RoomRequest roomRequest;
         try {
             roomRequest = RoomRequestConverter.fromJson(strRequest);
+            roomRequestService.saveRequest(roomRequest);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
