@@ -1,88 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Meeting Rooms</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
+    <meta charset="UTF-8">
+    <title>Meeting Rooms</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
 
-function updateRoom() {
-    let updateRoom = document.getElementById("updateForm").elements;
-    let url = '/editor/rooms/' + updateRoom.id.value;
-    let data = {
-        name: updateRoom.name.value,
-        capacity: updateRoom.capacity.value,
-        features: updateRoom.features.value
-    };
+        function updateRoom() {
+            let updateRoom = document.getElementById("updateForm").elements;
+            let url = '/editor/rooms/' + updateRoom.id.value;
+            let data = {
+                name: updateRoom.name.value,
+                capacity: updateRoom.capacity.value,
+                features: updateRoom.features.value
+            };
 
-    fetch(url, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(() => {
-        $('#updateModal').modal('hide');
-        window.location.href = '/editor/rooms';
-    })
-    .catch(error => console.error('Error:', error));
-}
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(() => {
+                    $('#updateModal').modal('hide');
+                    window.location.href = '/editor/rooms';
+                })
+                .catch(error => console.error('Error:', error));
+        }
 
-function deleteRoom(id) {
-    if (confirm(`Are you sure you want to delete the room ${id}?`)) {
-        let url = `/editor/rooms/${id}`;
-        fetch(url, {
-            method: 'DELETE',
-        })
-        .then(() => {
-            window.location.href = '/editor/rooms';
-        })
-        .catch(error => console.error('Error:', error));
-    }
-}
+        function deleteRoom(id) {
+            if (confirm(`Are you sure you want to delete the room ${id}?`)) {
+                let url = `/editor/rooms/${id}`;
+                fetch(url, {
+                    method: 'DELETE',
+                })
+                    .then(() => {
+                        window.location.href = '/editor/rooms';
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
 
-</script>
+    </script>
 </head>
 <body>
 <div class="container">
     <a href="/" class="btn btn-secondary inline my-2">Home</a>
-    <h1 class="text-center float-right">Request a Meeting Room</h1>
-    <div class="row">
-        <div class="col-sm-12">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Room Name</th>
-                    <th>Capacity</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="room : ${rooms}">
-                    <td th:text="${room.name}"></td>
-                    <td th:text="${room.capacity}"></td>
-                    <td><input type="datetime-local" id="startTime" name="startTime"></td>
-                    <td><input type="datetime-local" id="endTime" name="endTime"></td>
-                    <td>
-                        <a class="btn btn-primary" th:attr="onclick=|submitRequest('${room.id}')|">
-                            <i data-feather="plus"></i>Request
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <h1 class="text-center float-right">Meeting Rooms</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="room : ${rooms}">
+            <td th:text="${room.name}"></td>
+            <td th:text="${room.capacity}"></td>
+            <td>
+                <a class="btn btn-primary" th:attr="href=|/editor/rooms/${room.id}/edit|">
+                    <i data-feather="edit"></i>Update
+                </a>
+                <a class="btn btn-danger" th:attr="onclick=|deleteRoom('${room.id}')|">
+                    <i data-feather="trash-2"></i>Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/editor/rooms/add" class="btn btn-success">Add Room</a>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity></script>
 <script>
-feather.replace()
+    feather.replace()
 </script>
 </body>
 </html>
