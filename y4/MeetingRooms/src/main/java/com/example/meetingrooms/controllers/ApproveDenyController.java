@@ -54,7 +54,7 @@ public class ApproveDenyController {
     public String denyRequest(@RequestParam("requestId") Long requestId) {
         RoomRequest roomRequest = roomRequestService.getRequestById(requestId);
         roomRequest.setApproved(false);
-        roomRequestService.saveRequest(roomRequest);
+        roomRequestService.deleteRequest(roomRequest);
         return "redirect:/approver";
     }
 }

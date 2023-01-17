@@ -24,4 +24,8 @@ public class RoomRequestService {
     public void saveRequest(RoomRequest roomRequest) {
         roomRequestRepository.save(roomRequest);
     }
+
+    public void deleteRequest(RoomRequest roomRequest) {
+        roomRequestRepository.delete(roomRequest);
+    }
 }
