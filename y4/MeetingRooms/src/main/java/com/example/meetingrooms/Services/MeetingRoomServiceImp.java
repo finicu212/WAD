@@ -68,11 +68,6 @@ public class MeetingRoomServiceImp implements MeetingRoomService{
 		return true;
 	}
 
-	@Override
-	public List<MeetingRoom> findMeetingRoomAvailable(Date db, Date de) {
-		return (List<MeetingRoom>) meetingRoomRepository.findMeetingRoomAvailable(db, de);
-	}
-
 	public void markRoomAsUnavailable(int roomId, LocalDateTime startTime, LocalDateTime endTime) {
 		MeetingRoom room = meetingRoomRepository.findById(roomId).orElse(null);
 		if (room == null) {

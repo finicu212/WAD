@@ -17,6 +17,5 @@ public interface MeetingRoomService {
     MeetingRoom findById(Integer id);
     MeetingRoom updateRoom(MeetingRoom meetingroom, Integer id);
     Boolean deleteRoom(Integer id);
-    List<MeetingRoom> findMeetingRoomAvailable(Date db, Date de);
     void markRoomAsUnavailable(int roomId, LocalDateTime startTime, LocalDateTime endTime);
 }
