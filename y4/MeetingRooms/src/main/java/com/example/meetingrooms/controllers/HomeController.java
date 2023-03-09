@@ -40,6 +40,11 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
+
     @GetMapping("/editor")
     public String editor() {
         return "editor";
